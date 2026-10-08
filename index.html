@@ -1,1614 +1,1142 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#160b24">
+    <meta name="description" content="یک دعوت خاص برای آزی 🌸">
 
     <title>برای آزی 🌸</title>
 
     <style>
-
         * {
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html,
-        body {
             margin: 0;
             padding: 0;
-            width: 100%;
-            min-height: 100%;
-            font-family: Tahoma, Arial, sans-serif;
+        }
 
-            background:
-                radial-gradient(
-                    circle at top left,
-                    rgba(255, 70, 160, 0.25),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at bottom right,
-                    rgba(160, 60, 255, 0.22),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #120713,
-                    #230c22,
-                    #0d0714
-                );
-
-            color: white;
-            overflow-x: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            font-family: Arial, Tahoma, sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 50, 150, 0.15), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(140, 60, 255, 0.18), transparent 30%),
+                linear-gradient(135deg, #0d0615, #180b25 50%, #0b0612);
         }
 
-        /* =====================================================
-           BACKGROUND
-        ===================================================== */
+        /* =========================
+           Background Glow
+        ========================== */
 
-        .background-glow {
+        .bg-glow {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            inset: 0;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.18;
             pointer-events: none;
-            overflow: hidden;
             z-index: 0;
         }
 
-        .glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: 0.35;
-            animation: floatGlow 8s ease-in-out infinite alternate;
-        }
-
-        .glow.one {
-            width: 220px;
-            height: 220px;
+        .glow-1 {
             background: #ff2f92;
-            top: 5%;
-            left: -70px;
+            top: -120px;
+            right: -100px;
         }
 
-        .glow.two {
-            width: 260px;
-            height: 260px;
-            background: #8b35ff;
-            bottom: -80px;
-            right: -80px;
-            animation-delay: 2s;
+        .glow-2 {
+            background: #8c3dff;
+            bottom: -120px;
+            left: -100px;
         }
 
-        .glow.three {
-            width: 180px;
-            height: 180px;
-            background: #ff5eb8;
-            top: 45%;
-            right: 15%;
-            opacity: 0.15;
-            animation-delay: 4s;
-        }
+        /* =========================
+           Floating Hearts
+        ========================== */
 
-        @keyframes floatGlow {
-
-            from {
-                transform: translate(0, 0) scale(1);
-            }
-
-            to {
-                transform: translate(30px, -25px) scale(1.12);
-            }
-
-        }
-
-        /* =====================================================
-           HEARTS
-        ===================================================== */
-
-        .hearts-container {
+        .hearts {
             position: fixed;
             inset: 0;
-            pointer-events: none;
             overflow: hidden;
+            pointer-events: none;
             z-index: 1;
         }
 
         .heart {
             position: absolute;
-            bottom: -40px;
-            font-size: 20px;
+            bottom: -50px;
+            font-size: 18px;
             opacity: 0;
-
-            animation:
-                heartFloat linear forwards;
+            animation: floatHeart linear forwards;
         }
 
-        @keyframes heartFloat {
-
+        @keyframes floatHeart {
             0% {
-                transform:
-                    translateY(0)
-                    rotate(0deg)
-                    scale(0.7);
-
+                transform: translateY(0) rotate(0deg);
                 opacity: 0;
             }
 
             10% {
-                opacity: 0.8;
+                opacity: 0.7;
             }
 
             80% {
-                opacity: 0.65;
+                opacity: 0.5;
             }
 
             100% {
-                transform:
-                    translateY(-110vh)
-                    rotate(360deg)
-                    scale(1.2);
-
+                transform: translateY(-110vh) rotate(360deg);
                 opacity: 0;
             }
-
         }
 
-        /* =====================================================
-           MUSIC BUTTON
-        ===================================================== */
+        /* =========================
+           Music Button
+        ========================== */
 
-        .music-mini {
-
+        .music-button {
             position: fixed;
-
-            top: 14px;
-            right: 14px;
-
-            width: 42px;
-            height: 42px;
-
+            top: 18px;
+            left: 18px;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-
-            border: 1px solid
-                rgba(255, 255, 255, 0.22);
-
-            background:
-                rgba(255, 70, 160, 0.22);
-
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             color: white;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 100;
+            transition: 0.3s;
+        }
 
+        .music-button:hover {
+            transform: scale(1.08);
+            background: rgba(255, 80, 160, 0.2);
+        }
+
+        .music-button.playing {
+            box-shadow: 0 0 25px rgba(255, 50, 150, 0.5);
+        }
+
+        /* =========================
+           Main
+        ========================== */
+
+        main {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 20px;
-
-            cursor: pointer;
-
-            z-index: 9999;
-
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-
-            box-shadow:
-                0 5px 20px
-                rgba(255, 40, 150, 0.22);
-
-            transition:
-                transform 0.2s ease,
-                background 0.2s ease;
+            padding: 25px 15px;
         }
 
-        .music-mini:hover {
-
-            transform: scale(1.08);
-
-            background:
-                rgba(255, 70, 160, 0.35);
-        }
-
-        .music-mini:active {
-
-            transform: scale(0.9);
-        }
-
-        .music-mini.playing {
-
-            animation:
-                musicPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes musicPulse {
-
-            0%,
-            100% {
-                box-shadow:
-                    0 5px 20px
-                    rgba(255, 40, 150, 0.25);
-            }
-
-            50% {
-                box-shadow:
-                    0 5px 28px
-                    rgba(255, 40, 150, 0.65);
-            }
-
-        }
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        .app {
-
-            position: relative;
-            z-index: 5;
-
+        .container {
             width: 100%;
-            max-width: 650px;
-
-            margin: auto;
-
-            min-height: 100vh;
-
-            padding:
-                25px 16px 50px;
+            max-width: 620px;
         }
+
+        /* =========================
+           Pages
+        ========================== */
 
         .page {
-
             display: none;
-
-            min-height:
-                calc(100vh - 75px);
-
-            align-items: center;
-            justify-content: center;
+            animation: pageIn 0.55s ease;
         }
 
         .page.active {
-
-            display: flex;
-
-            animation:
-                pageIn 0.6s ease;
+            display: block;
         }
 
         @keyframes pageIn {
-
             from {
                 opacity: 0;
-                transform:
-                    translateY(20px)
-                    scale(0.98);
+                transform: translateY(18px) scale(0.98);
             }
 
             to {
                 opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
+                transform: translateY(0) scale(1);
             }
-
         }
 
-        /* =====================================================
-           CARD
-        ===================================================== */
+        /* =========================
+           Card
+        ========================== */
 
         .card {
-
-            width: 100%;
-
-            padding:
-                30px 22px;
-
+            position: relative;
+            padding: 35px 30px;
             border-radius: 30px;
-
-            background:
-                rgba(255, 255, 255, 0.075);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.15);
-
+            background: rgba(255, 255, 255, 0.065);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
             box-shadow:
-                0 25px 70px
-                rgba(0, 0, 0, 0.45),
-
-                inset 0 1px 0
-                rgba(255, 255, 255, 0.08);
-
-            backdrop-filter:
-                blur(20px);
-
-            -webkit-backdrop-filter:
-                blur(20px);
+                0 25px 70px rgba(0, 0, 0, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            text-align: center;
         }
 
-        /* =====================================================
-           TEXT
-        ===================================================== */
+        /* =========================
+           Logo
+        ========================== */
 
         .logo {
-
-            text-align: center;
-
-            font-size: 52px;
-
-            font-weight: 900;
-
-            margin-bottom: 12px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #fff,
-                    #ff76bb,
-                    #d96dff
-                );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            filter:
-                drop-shadow(
-                    0 0 18px
-                    rgba(255, 80, 170, 0.45)
-                );
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #ff82bb;
+            text-shadow: 0 0 20px rgba(255, 70, 160, 0.5);
         }
 
-        .main-title {
+        .logo span {
+            color: white;
+        }
 
-            text-align: center;
+        /* =========================
+           Typography
+        ========================== */
 
-            font-size: 30px;
+        h1 {
+            font-size: clamp(30px, 7vw, 48px);
+            line-height: 1.4;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff, #ff9bc8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-            line-height: 1.6;
-
-            margin:
-                0 0 15px;
-
-            font-weight: 900;
+        h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
         }
 
         .subtitle {
-
-            text-align: center;
-
-            color:
-                rgba(255, 255, 255, 0.82);
-
-            margin-bottom: 35px;
-
-            font-size: 19px;
-
-            line-height: 2;
-        }
-
-        .section-title {
-
-            text-align: center;
-
-            font-size: 27px;
-
-            margin-bottom: 15px;
-
-            font-weight: 900;
-        }
-
-        .section-description {
-
-            text-align: center;
-
-            color:
-                rgba(255, 255, 255, 0.78);
-
-            line-height: 2.1;
-
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            line-height: 1.9;
             margin-bottom: 30px;
+        }
 
-            font-size: 18px;
+        /* =========================
+           Features
+        ========================== */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 25px 0 30px;
+        }
+
+        .feature {
+            padding: 17px 10px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 27px;
+            margin-bottom: 7px;
         }
 
         .feature-text {
-
-            font-size: 16px;
-
-            line-height: 1.8;
-
-            color:
-                rgba(255, 255, 255, 0.78);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
         }
 
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
+        /* =========================
+           Buttons
+        ========================== */
 
         .buttons {
-
             display: flex;
-
             gap: 12px;
-
             justify-content: center;
-
             flex-wrap: wrap;
         }
 
         .btn {
-
+            position: relative;
             border: none;
-
-            cursor: pointer;
-
+            min-height: 52px;
+            padding: 0 25px;
+            border-radius: 17px;
             font-family: inherit;
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            padding:
-                15px 25px;
-
-            min-width: 145px;
-
-            border-radius: 18px;
-
-            color: white;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .btn:active {
-
-            transform:
-                scale(0.94);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s;
         }
 
         .btn-primary {
+            color: white;
+            background: linear-gradient(135deg, #ff3c91, #9d42ff);
+            box-shadow: 0 10px 30px rgba(255, 50, 150, 0.25);
+        }
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff3f9e,
-                    #d94cff
-                );
-
-            box-shadow:
-                0 12px 35px
-                rgba(255, 55, 155, 0.3);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 50, 150, 0.4);
         }
 
         .btn-secondary {
-
-            background:
-                rgba(255, 255, 255, 0.08);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.14);
+            color: white;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        /* =====================================================
-           NO BUTTON
-        ===================================================== */
-
-        .no-button-wrapper {
-
-            position: relative;
-
-            width: 145px;
-            height: 54px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.13);
         }
 
         #noBtn {
-
-            min-width: 145px;
-
-            position: absolute;
-
-            left: 0;
-            top: 0;
-
-            white-space: nowrap;
-
-            z-index: 20;
-
-            transition:
-                left 0.18s ease,
-                top 0.18s ease,
-                transform 0.18s ease;
+            transition: left 0.15s ease, top 0.15s ease;
         }
 
-        /* =====================================================
-           FEATURES
-        ===================================================== */
+        /* =========================
+           Step Indicator
+        ========================== */
 
-        .features {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 10px;
-
-            margin:
-                25px 0;
+        .step {
+            color: #ff82bb;
+            font-size: 13px;
+            margin-bottom: 18px;
+            opacity: 0.9;
         }
 
-        .feature {
-
-            text-align: center;
-
-            padding:
-                15px 8px;
-
-            border-radius: 18px;
-
-            background:
-                rgba(255, 255, 255, 0.055);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.08);
-        }
-
-        .feature-icon {
-
-            font-size: 30px;
-
-            margin-bottom: 8px;
-        }
-
-        /* =====================================================
-           FORM
-        ===================================================== */
+        /* =========================
+           Form
+        ========================== */
 
         .form-group {
-
+            text-align: right;
             margin-bottom: 22px;
         }
 
-        .form-label {
-
+        .form-group label {
             display: block;
-
             margin-bottom: 9px;
-
-            color:
-                rgba(255, 255, 255, 0.92);
-
-            font-size: 17px;
-
-            font-weight: bold;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         select,
-        input[type="text"] {
-
+        input {
             width: 100%;
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.16);
-
-            background:
-                rgba(0, 0, 0, 0.25);
-
-            color: white;
-
-            padding: 15px;
-
-            border-radius: 15px;
-
+            height: 54px;
+            border-radius: 16px;
+            padding: 0 16px;
+            border: 1px solid rgba(255, 255, 255, 0.13);
             outline: none;
-
+            color: white;
+            background: rgba(0, 0, 0, 0.23);
             font-family: inherit;
-
-            font-size: 17px;
-
-            appearance: none;
-
-            -webkit-appearance: none;
+            font-size: 15px;
         }
 
         select:focus,
-        input[type="text"]:focus {
-
-            border-color:
-                rgba(255, 90, 175, 0.75);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(255, 70, 160, 0.12);
+        input:focus {
+            border-color: rgba(255, 100, 180, 0.7);
+            box-shadow: 0 0 0 3px rgba(255, 70, 160, 0.1);
         }
 
-        option {
-
-            background:
-                #251126;
-
+        select option {
+            background: #21102f;
             color: white;
         }
 
-        /* =====================================================
-           PLACES
-        ===================================================== */
+        /* =========================
+           Place Cards
+        ========================== */
 
         .places {
-
             display: grid;
-
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 13px;
+            margin: 25px 0;
         }
 
         .place {
-
             position: relative;
-
-            padding: 17px;
-
+            min-height: 110px;
+            padding: 18px 12px;
             border-radius: 20px;
-
-            background:
-                rgba(255, 255, 255, 0.055);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.1);
-
             cursor: pointer;
-
-            transition:
-                0.25s transform,
-                0.25s border-color,
-                0.25s background;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.25s;
         }
 
         .place:hover {
-
-            transform:
-                translateY(-2px);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .place.selected {
-
-            border-color:
-                rgba(255, 83, 170, 0.85);
-
-            background:
-                rgba(255, 55, 150, 0.12);
-
+            border-color: #ff55a5;
+            background: rgba(255, 50, 150, 0.12);
             box-shadow:
-                0 10px 35px
-                rgba(255, 50, 150, 0.12);
+                0 0 0 1px rgba(255, 70, 160, 0.25),
+                0 12px 30px rgba(255, 50, 150, 0.12);
         }
 
-        .place-title {
-
-            font-size: 19px;
-
-            font-weight: 900;
-
-            margin-bottom: 4px;
+        .place-icon {
+            font-size: 34px;
+            margin-bottom: 8px;
         }
 
-        .place-description {
-
+        .place-name {
             font-size: 15px;
-
-            line-height: 1.7;
-
-            color:
-                rgba(255, 255, 255, 0.72);
-
-            margin-top: 5px;
+            font-weight: bold;
         }
 
-        /* =====================================================
-           SUMMARY
-        ===================================================== */
+        .custom-place {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .custom-place.show {
+            display: block;
+            animation: pageIn 0.3s ease;
+        }
+
+        /* =========================
+           Summary
+        ========================== */
 
         .summary {
-
-            margin:
-                25px 0;
-
-            padding: 18px;
-
+            margin: 25px 0;
+            padding: 20px;
             border-radius: 20px;
-
-            background:
-                rgba(0, 0, 0, 0.18);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .summary-row {
-
             display: flex;
-
             justify-content: space-between;
-
+            align-items: center;
             gap: 15px;
-
-            padding: 10px 0;
-
-            border-bottom:
-                1px solid
-                rgba(255, 255, 255, 0.07);
-
-            font-size: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .summary-row:last-child {
-
             border-bottom: none;
         }
 
         .summary-label {
-
-            color:
-                rgba(255, 255, 255, 0.58);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 14px;
         }
 
         .summary-value {
-
             font-weight: bold;
-
-            text-align: left;
+            color: #ff9bc8;
         }
 
-        /* =====================================================
-           COUNTDOWN
-        ===================================================== */
+        /* =========================
+           Countdown
+        ========================== */
 
         .countdown {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-
-            margin:
-                25px 0;
+            margin: 25px 0;
         }
 
         .count-box {
-
-            padding:
-                13px 5px;
-
-            border-radius: 16px;
-
-            text-align: center;
-
-            background:
-                rgba(255, 255, 255, 0.06);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.1);
+            padding: 13px 5px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.045);
         }
 
         .count-number {
-
-            font-size: 24px;
-
-            font-weight: 900;
-
             display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
         }
 
         .count-label {
-
             display: block;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+        }
 
-            margin-top: 4px;
+        /* =========================
+           Status
+        ========================== */
 
+        .status {
+            margin: 20px 0;
+            padding: 14px 16px;
+            border-radius: 15px;
             font-size: 13px;
-
-            color:
-                rgba(255, 255, 255, 0.62);
-        }
-
-        /* =====================================================
-           SMS STATUS
-        ===================================================== */
-
-        .sms-status {
-
-            text-align: center;
-
-            margin-top: 15px;
-
-            min-height: 28px;
-
-            font-size: 14px;
-
             line-height: 1.8;
-
-            color:
-                rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.045);
+            color: rgba(255, 255, 255, 0.72);
         }
 
-        .sms-status.success {
-
-            color: #ffb9dc;
+        .status.success {
+            color: #8fffc3;
+            background: rgba(60, 255, 160, 0.08);
+            border: 1px solid rgba(60, 255, 160, 0.13);
         }
 
-        .sms-status.error {
-
-            color: #ff9d9d;
+        .status.error {
+            color: #ff9aaf;
+            background: rgba(255, 60, 100, 0.08);
+            border: 1px solid rgba(255, 60, 100, 0.13);
         }
 
-        /* =====================================================
-           TOAST
-        ===================================================== */
+        .status.loading {
+            color: #ffc1df;
+        }
+
+        /* =========================
+           Toast
+        ========================== */
 
         .toast {
-
             position: fixed;
-
             left: 50%;
-
             bottom: 25px;
-
-            transform:
-                translate(-50%, 120px);
-
-            width:
-                calc(100% - 35px);
-
-            max-width: 500px;
-
-            padding:
-                15px 18px;
-
-            border-radius: 17px;
-
-            background:
-                rgba(20, 10, 22, 0.92);
-
-            border:
-                1px solid
-                rgba(255, 255, 255, 0.13);
-
-            box-shadow:
-                0 15px 45px
-                rgba(0, 0, 0, 0.4);
-
+            transform: translate(-50%, 120px);
+            opacity: 0;
+            z-index: 1000;
+            min-width: 250px;
+            max-width: calc(100vw - 30px);
+            padding: 14px 18px;
             text-align: center;
-
-            font-size: 15px;
-
-            line-height: 1.7;
-
-            z-index: 10000;
-
-            transition:
-                transform 0.35s ease;
+            border-radius: 15px;
+            background: rgba(30, 15, 45, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transition: 0.35s;
+            font-size: 14px;
         }
 
         .toast.show {
-
-            transform:
-                translate(-50%, 0);
+            transform: translate(-50%, 0);
+            opacity: 1;
         }
 
-        /* =====================================================
-           FOOTER
-        ===================================================== */
+        /* =========================
+           Footer
+        ========================== */
 
         .footer {
-
-            text-align: center;
-
             margin-top: 25px;
-
-            color:
-                rgba(255, 255, 255, 0.48);
-
-            font-size: 14px;
-
-            line-height: 1.8;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.32);
         }
 
-        /* =====================================================
-           MOBILE
-        ===================================================== */
+        /* =========================
+           Heart Burst
+        ========================== */
 
-        @media (max-width: 500px) {
+        .burst-heart {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 24px;
+            animation: burst 1.3s ease-out forwards;
+        }
 
-            .app {
+        @keyframes burst {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3);
+                opacity: 1;
+            }
 
-                padding:
-                    15px 12px 35px;
+            100% {
+                transform:
+                    translate(
+                        calc(-50% + var(--x)),
+                        calc(-50% + var(--y))
+                    )
+                    scale(1.5)
+                    rotate(var(--r));
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           Mobile
+        ========================== */
+
+        @media (max-width: 600px) {
+            main {
+                padding: 18px 12px;
             }
 
             .card {
-
-                padding:
-                    25px 17px;
-
-                border-radius: 25px;
-            }
-
-            .logo {
-
-                font-size: 46px;
-            }
-
-            .main-title {
-
-                font-size: 26px;
-            }
-
-            .subtitle {
-
-                font-size: 18px;
-            }
-
-            .section-title {
-
-                font-size: 24px;
-            }
-
-            .section-description {
-
-                font-size: 17px;
+                padding: 28px 18px;
+                border-radius: 24px;
             }
 
             .features {
-
-                grid-template-columns:
-                    1fr;
+                gap: 8px;
             }
 
             .feature {
+                padding: 14px 6px;
+            }
 
-                display: flex;
+            .feature-text {
+                font-size: 11px;
+            }
 
-                align-items: center;
-
+            .places {
                 gap: 10px;
-
-                text-align: right;
             }
 
-            .feature-icon {
-
-                margin: 0;
-            }
-
-            .btn {
-
-                width: 100%;
+            .place {
+                min-height: 100px;
             }
 
             .count-number {
-
-                font-size: 21px;
+                font-size: 20px;
             }
 
-            .no-button-wrapper {
-
+            .btn {
                 width: 100%;
             }
 
-            #noBtn {
-
-                width: 145px;
+            .buttons {
+                width: 100%;
             }
 
+            .music-button {
+                width: 44px;
+                height: 44px;
+                top: 12px;
+                left: 12px;
+            }
         }
-
     </style>
-
 </head>
 
 <body>
 
-    <!-- =====================================================
-         BACKGROUND
-    ===================================================== -->
+    <!-- Background -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
 
-    <div class="background-glow">
+    <!-- Floating Hearts -->
+    <div class="hearts" id="heartsContainer"></div>
 
-        <div class="glow one"></div>
-        <div class="glow two"></div>
-        <div class="glow three"></div>
-
-    </div>
-
-    <div
-        class="hearts-container"
-        id="heartsContainer">
-    </div>
-
-    <!-- =====================================================
-         MUSIC BUTTON
-    ===================================================== -->
-
+    <!-- Music -->
     <button
-        class="music-mini"
+        class="music-button"
         id="musicMini"
         onclick="toggleMusic()"
-        aria-label="موزیک">
-
+        aria-label="پخش موسیقی"
+    >
         🎵
-
     </button>
 
-    <!-- =====================================================
-         MAIN APP
-    ===================================================== -->
+    <audio id="music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-    <main class="app">
+    <main>
+        <div class="container">
 
-        <!-- =================================================
-             PAGE 1
-        ================================================= -->
+            <!-- =========================
+                 PAGE 1
+            ========================== -->
 
-        <section
-            class="page active"
-            id="page1">
+            <section class="page active" id="page1">
+                <div class="card">
 
-            <div class="card">
+                    <div class="logo">
+                        آزی <span>🌸</span>
+                    </div>
 
-                <div class="logo">
-                    آزی 🌸
-                </div>
+                    <h1>
+                        با من میای یه قرار؟ 💕
+                    </h1>
 
-                <h1 class="main-title">
-                    با من میای یه قرار؟ 💕
-                </h1>
+                    <p class="subtitle">
+                        یه قرار کوچیک، یه عالمه خاطره،
+                        <br>
+                        و شاید شروع یه اتفاق قشنگ ✨
+                    </p>
 
-                <p class="subtitle">
-                    یه برنامه کوچیک ولی قشنگ
-                    برای یه روز متفاوت...
-                </p>
+                    <div class="features">
 
-                <div class="features">
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            ☕
+                        <div class="feature">
+                            <div class="feature-icon">☕</div>
+                            <div class="feature-text">
+                                یه جای دنج
+                            </div>
                         </div>
 
-                        <div class="feature-text">
-                            یه جای دنج
-                            و دوست‌داشتنی
+                        <div class="feature">
+                            <div class="feature-icon">🌸</div>
+                            <div class="feature-text">
+                                یه حس خوب
+                            </div>
+                        </div>
+
+                        <div class="feature">
+                            <div class="feature-icon">✨</div>
+                            <div class="feature-text">
+                                یه خاطره جدید
+                            </div>
                         </div>
 
                     </div>
 
-                    <div class="feature">
+                    <div class="buttons">
 
-                        <div class="feature-icon">
-                            🌸
-                        </div>
-
-                        <div class="feature-text">
-                            یه خاطره
-                            متفاوت
-                        </div>
-
-                    </div>
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-                            ✨
-                        </div>
-
-                        <div class="feature-text">
-                            بدون برنامه‌ریزی
-                            خسته‌کننده
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="buttons">
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="startInvitation()">
-
-                        آره 😍
-
-                    </button>
-
-                    <div
-                        class="no-button-wrapper"
-                        id="noWrapper">
+                        <button
+                            class="btn btn-primary"
+                            onclick="startInvitation()"
+                        >
+                            آره 😍
+                        </button>
 
                         <button
                             class="btn btn-secondary"
-                            id="noBtn">
-
+                            id="noBtn"
+                            onmouseenter="runAway()"
+                            ontouchstart="runAway(event)"
+                            onclick="runAway(event)"
+                        >
                             نه 😏
+                        </button>
 
+                    </div>
+
+                    <div class="footer">
+                        فقط یه کلیک فاصله داری... 👀
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- =========================
+                 PAGE 2
+            ========================== -->
+
+            <section class="page" id="page2">
+                <div class="card">
+
+                    <div class="step">
+                        مرحله ۱ از ۲ 💕
+                    </div>
+
+                    <h2>
+                        کی بریم؟ 🗓️
+                    </h2>
+
+                    <p class="subtitle">
+                        یه روز و ساعت انتخاب کن
+                    </p>
+
+                    <div class="form-group">
+
+                        <label for="dateSelect">
+                            تاریخ قرار
+                        </label>
+
+                        <select id="dateSelect">
+                            <option value="">
+                                در حال آماده‌سازی...
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="timeSelect">
+                            ساعت قرار
+                        </label>
+
+                        <select id="timeSelect">
+
+                            <option value="">
+                                انتخاب ساعت
+                            </option>
+
+                            <option value="16:00">
+                                ۱۶:۰۰
+                            </option>
+
+                            <option value="17:00">
+                                ۱۷:۰۰
+                            </option>
+
+                            <option value="18:00">
+                                ۱۸:۰۰
+                            </option>
+
+                            <option value="19:00">
+                                ۱۹:۰۰
+                            </option>
+
+                            <option value="20:00">
+                                ۲۰:۰۰
+                            </option>
+
+                            <option value="21:00">
+                                ۲۱:۰۰
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="buttons">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="goToPlacePage()"
+                        >
+                            ادامه 💕
+                        </button>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="showPage(1)"
+                        >
+                            برگشت
                         </button>
 
                     </div>
 
                 </div>
+            </section>
 
-                <div class="footer">
-                    فقط یه لمس کوچیک کافیه... 🌷
-                </div>
 
-            </div>
+            <!-- =========================
+                 PAGE 3
+            ========================== -->
 
-        </section>
+            <section class="page" id="page3">
+                <div class="card">
 
-        <!-- =================================================
-             PAGE 2
-        ================================================= -->
+                    <div class="step">
+                        مرحله ۲ از ۲ 💕
+                    </div>
 
-        <section
-            class="page"
-            id="page2">
+                    <h2>
+                        کجا بریم؟ 📍
+                    </h2>
 
-            <div class="card">
+                    <p class="subtitle">
+                        انتخاب با توئه... یا بذار سورپرایزت کنم 😏
+                    </p>
 
-                <h2 class="section-title">
-                    پس بریم سراغ برنامه 😌✨
-                </h2>
+                    <div class="places">
 
-                <p class="section-description">
-                    حالا یه روز و ساعت انتخاب کن
-                    تا قرارمون شکل بگیره.
-                </p>
+                        <div
+                            class="place"
+                            data-place="کافه"
+                            onclick="selectPlace(this)"
+                        >
+                            <div class="place-icon">
+                                ☕
+                            </div>
 
-                <div class="form-group">
+                            <div class="place-name">
+                                کافه
+                            </div>
+                        </div>
 
-                    <label class="form-label">
-                        📅 روز قرار
-                    </label>
 
-                    <select id="dateSelect"></select>
+                        <div
+                            class="place"
+                            data-place="رستوران"
+                            onclick="selectPlace(this)"
+                        >
+                            <div class="place-icon">
+                                🍽️
+                            </div>
 
-                </div>
+                            <div class="place-name">
+                                رستوران
+                            </div>
+                        </div>
 
-                <div class="form-group">
 
-                    <label class="form-label">
-                        ⏰ ساعت قرار
-                    </label>
+                        <div
+                            class="place"
+                            data-place="پارک"
+                            onclick="selectPlace(this)"
+                        >
+                            <div class="place-icon">
+                                🌳
+                            </div>
 
-                    <select id="timeSelect">
+                            <div class="place-name">
+                                پارک
+                            </div>
+                        </div>
 
-                        <option value="16:00">
-                            ۴:۰۰ عصر
-                        </option>
 
-                        <option value="17:00">
-                            ۵:۰۰ عصر
-                        </option>
+                        <div
+                            class="place"
+                            data-place="سورپرایز"
+                            onclick="selectPlace(this)"
+                        >
+                            <div class="place-icon">
+                                🎁
+                            </div>
 
-                        <option value="18:00">
-                            ۶:۰۰ عصر
-                        </option>
+                            <div class="place-name">
+                                سورپرایز 😏
+                            </div>
+                        </div>
 
-                        <option value="19:00">
-                            ۷:۰۰ عصر
-                        </option>
+                    </div>
 
-                        <option value="20:00">
-                            ۸:۰۰ شب
-                        </option>
-
-                        <option value="21:00">
-                            ۹:۰۰ شب
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class="buttons">
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="goToPage(3)">
-
-                        ادامه 💕
-
-                    </button>
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="goToPage(1)">
-
-                        برگشت
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- =================================================
-             PAGE 3
-        ================================================= -->
-
-        <section
-            class="page"
-            id="page3">
-
-            <div class="card">
-
-                <h2 class="section-title">
-                    حالا کجا بریم؟ 🌷
-                </h2>
-
-                <p class="section-description">
-                    یکی رو انتخاب کن؛
-                    البته گزینه آخر یه مقدار مرموزه 😏
-                </p>
-
-                <div class="places">
 
                     <div
-                        class="place"
-                        data-place="کافه"
-                        onclick="selectPlace(this)">
+                        class="custom-place"
+                        id="customPlaceBox"
+                    >
 
-                        <div class="place-title">
-                            ☕ کافه
+                        <input
+                            id="customPlace"
+                            type="text"
+                            maxlength="100"
+                            placeholder="اگر دوست داری خودت پیشنهاد بده..."
+                        >
+
+                    </div>
+
+
+                    <div class="buttons">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="confirmPlace()"
+                        >
+                            انتخاب کردم ❤️
+                        </button>
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="showPage(2)"
+                        >
+                            برگشت
+                        </button>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- =========================
+                 PAGE 4
+            ========================== -->
+
+            <section class="page" id="page4">
+                <div class="card">
+
+                    <div class="logo">
+                        قرارمون ثبت شد ❤️
+                    </div>
+
+                    <h1>
+                        منتظرتم آزی ✨
+                    </h1>
+
+                    <p class="subtitle">
+                        پس قرارمون اینه...
+                    </p>
+
+
+                    <div class="summary">
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                📅 تاریخ
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="summaryDate"
+                            >
+                                -
+                            </span>
+
                         </div>
 
-                        <div class="place-description">
-                            یه کافه دنج،
-                            نوشیدنی و کلی حرف برای گفتن.
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                ⏰ ساعت
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="summaryTime"
+                            >
+                                -
+                            </span>
+
+                        </div>
+
+
+                        <div class="summary-row">
+
+                            <span class="summary-label">
+                                📍 مکان
+                            </span>
+
+                            <span
+                                class="summary-value"
+                                id="summaryPlace"
+                            >
+                                -
+                            </span>
+
                         </div>
 
                     </div>
+
+
+                    <div class="countdown">
+
+                        <div class="count-box">
+                            <span
+                                class="count-number"
+                                id="days"
+                            >
+                                0
+                            </span>
+
+                            <span class="count-label">
+                                روز
+                            </span>
+                        </div>
+
+
+                        <div class="count-box">
+                            <span
+                                class="count-number"
+                                id="hours"
+                            >
+                                0
+                            </span>
+
+                            <span class="count-label">
+                                ساعت
+                            </span>
+                        </div>
+
+
+                        <div class="count-box">
+                            <span
+                                class="count-number"
+                                id="minutes"
+                            >
+                                0
+                            </span>
+
+                            <span class="count-label">
+                                دقیقه
+                            </span>
+                        </div>
+
+
+                        <div class="count-box">
+                            <span
+                                class="count-number"
+                                id="seconds"
+                            >
+                                0
+                            </span>
+
+                            <span class="count-label">
+                                ثانیه
+                            </span>
+                        </div>
+
+                    </div>
+
 
                     <div
-                        class="place"
-                        data-place="رستوران"
-                        onclick="selectPlace(this)">
+                        class="status loading"
+                        id="status"
+                    >
+                        در حال ارسال اعلان... 🔔
+                    </div>
 
-                        <div class="place-title">
-                            🍕 رستوران
-                        </div>
 
-                        <div class="place-description">
-                            یه غذای خوشمزه
-                            و یه میز برای یه شب قشنگ.
-                        </div>
+                    <div class="buttons">
+
+                        <button
+                            class="btn btn-secondary"
+                            onclick="changePlace()"
+                        >
+                            تغییر انتخاب
+                        </button>
 
                     </div>
 
-                    <div
-                        class="place"
-                        data-place="پارک"
-                        onclick="selectPlace(this)">
 
-                        <div class="place-title">
-                            🌳 پارک
-                        </div>
-
-                        <div class="place-description">
-                            قدم زدن،
-                            هوای آزاد و یه عالمه خنده.
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="place"
-                        data-place="سورپرایز"
-                        onclick="selectPlace(this)">
-
-                        <div class="place-title">
-                            🎁 سورپرایز
-                        </div>
-
-                        <div class="place-description">
-                            مقصد رو نمی‌گم...
-                            خودت باید اعتماد کنی 😏✨
-                        </div>
-
+                    <div class="footer">
+                        این فقط یه قرار نیست... یه خاطره‌ست که قراره ساخته بشه 💕
                     </div>
 
                 </div>
+            </section>
 
-                <div
-                    id="customPlaceBox"
-                    class="form-group"
-                    style="display:none; margin-top:20px;">
-
-                    <label class="form-label">
-                        📍 مقصد موردنظر
-                    </label>
-
-                    <input
-                        type="text"
-                        id="customPlace"
-                        placeholder="مثلاً کافه مورد علاقه‌مون...">
-
-                </div>
-
-                <div
-                    class="buttons"
-                    style="margin-top:25px;">
-
-                    <button
-                        class="btn btn-primary"
-                        id="confirmPlaceBtn"
-                        onclick="confirmPlace()">
-
-                        انتخاب کردم 😍
-
-                    </button>
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="goToPage(2)">
-
-                        برگشت
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- =================================================
-             PAGE 4
-        ================================================= -->
-
-        <section
-            class="page"
-            id="page4">
-
-            <div class="card">
-
-                <div class="logo">
-                    💖
-                </div>
-
-                <h2 class="section-title">
-                    قرارمون ثبت شد!
-                </h2>
-
-                <p class="section-description">
-                    حالا دیگه رسماً یه قرار داریم 😌
-                </p>
-
-                <div class="summary">
-
-                    <div class="summary-row">
-
-                        <span class="summary-label">
-                            📅 تاریخ
-                        </span>
-
-                        <span
-                            class="summary-value"
-                            id="summaryDate">
-
-                            -
-
-                        </span>
-
-                    </div>
-
-                    <div class="summary-row">
-
-                        <span class="summary-label">
-                            ⏰ ساعت
-                        </span>
-
-                        <span
-                            class="summary-value"
-                            id="summaryTime">
-
-                            -
-
-                        </span>
-
-                    </div>
-
-                    <div class="summary-row">
-
-                        <span class="summary-label">
-                            📍 مکان
-                        </span>
-
-                        <span
-                            class="summary-value"
-                            id="summaryPlace">
-
-                            -
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div
-                    class="section-description"
-                    style="margin-bottom:10px;">
-
-                    زمان باقی‌مانده تا قرار:
-
-                </div>
-
-                <div class="countdown">
-
-                    <div class="count-box">
-
-                        <span
-                            class="count-number"
-                            id="days">
-
-                            00
-
-                        </span>
-
-                        <span class="count-label">
-                            روز
-                        </span>
-
-                    </div>
-
-                    <div class="count-box">
-
-                        <span
-                            class="count-number"
-                            id="hours">
-
-                            00
-
-                        </span>
-
-                        <span class="count-label">
-                            ساعت
-                        </span>
-
-                    </div>
-
-                    <div class="count-box">
-
-                        <span
-                            class="count-number"
-                            id="minutes">
-
-                            00
-
-                        </span>
-
-                        <span class="count-label">
-                            دقیقه
-                        </span>
-
-                    </div>
-
-                    <div class="count-box">
-
-                        <span
-                            class="count-number"
-                            id="seconds">
-
-                            00
-
-                        </span>
-
-                        <span class="count-label">
-                            ثانیه
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- SMS STATUS -->
-
-                <div
-                    class="sms-status"
-                    id="smsStatus">
-
-                    در حال ارسال پیامک... 📱
-
-                </div>
-
-                <div class="buttons">
-
-                    <button
-                        class="btn btn-primary"
-                        onclick="createHeartBurst()">
-
-                        یه قلب بفرست ❤️
-
-                    </button>
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="goToPage(3)">
-
-                        تغییر مکان
-
-                    </button>
-
-                </div>
-
-                <div class="footer">
-
-                    حالا فقط باید منتظر اون روز قشنگ بمونیم... 🌸
-
-                </div>
-
-            </div>
-
-        </section>
-
+        </div>
     </main>
 
-    <!-- =====================================================
-         TOAST
-    ===================================================== -->
 
+    <!-- Toast -->
     <div
         class="toast"
-        id="toast">
-    </div>
+        id="toast"
+    ></div>
 
-    <!-- =====================================================
-         AUDIO
-    ===================================================== -->
-
-    <audio
-        id="music"
-        loop
-        preload="auto">
-
-        <source
-            src="music.mp3"
-            type="audio/mpeg">
-
-    </audio>
 
     <script>
 
-        /* =====================================================
+        /* =========================================================
+           RENDER BACKEND
+        ========================================================= */
+
+        const BALE_BACKEND_URL =
+            "https://azi-bale-backend.onrender.com/send-appointment";
+
+
+        /* =========================================================
            VARIABLES
-        ===================================================== */
+        ========================================================= */
 
         const music =
             document.getElementById("music");
@@ -1620,9 +1148,8 @@
             document.getElementById("toast");
 
         const heartsContainer =
-            document.getElementById(
-                "heartsContainer"
-            );
+            document.getElementById("heartsContainer");
+
 
         let selectedPlace = "";
 
@@ -1630,89 +1157,46 @@
 
         let musicStartedByTouch = false;
 
-        /*
-         * Cloudflare Worker
-         *
-         * API Key اینجا قرار نمی‌گیرد.
-         * کلید TextBee فقط داخل Cloudflare Secret است.
-         */
+        let baleSent = false;
 
-        const SMS_BACKEND_URL =
-            "https://azi-sms-backend.aref-dehghan2526.workers.dev/send-appointment";
-
-        let smsSent = false;
-
-        let smsSending = false;
+        let baleSending = false;
 
 
-        /* =====================================================
+        /* =========================================================
            MUSIC
-        ===================================================== */
+        ========================================================= */
 
-        music.volume = 0.65;
+        async function playMusic() {
 
+            try {
 
-        function updateMusicUI(
-            isPlaying
-        ) {
+                await music.play();
 
-            if (isPlaying) {
+                musicMini.classList.add("playing");
 
-                musicMini.textContent = "⏸";
+                musicMini.textContent = "🎶";
 
-                musicMini.classList.add(
-                    "playing"
+                musicStartedByTouch = true;
+
+            } catch (error) {
+
+                console.log(
+                    "Music autoplay blocked:",
+                    error
                 );
-
-                musicMini.title =
-                    "توقف موزیک";
-
-            } else {
-
-                musicMini.textContent = "🎵";
-
-                musicMini.classList.remove(
-                    "playing"
-                );
-
-                musicMini.title =
-                    "پخش موزیک";
 
             }
 
         }
 
 
-        function playMusic() {
+        function pauseMusic() {
 
-            if (!music) {
-                return;
-            }
+            music.pause();
 
-            const promise =
-                music.play();
+            musicMini.classList.remove("playing");
 
-
-            if (promise !== undefined) {
-
-                promise
-                    .then(() => {
-
-                        updateMusicUI(
-                            true
-                        );
-
-                    })
-                    .catch(error => {
-
-                        console.log(
-                            "Music play error:",
-                            error
-                        );
-
-                    });
-
-            }
+            musicMini.textContent = "🎵";
 
         }
 
@@ -1725,11 +1209,7 @@
 
             } else {
 
-                music.pause();
-
-                updateMusicUI(
-                    false
-                );
+                pauseMusic();
 
             }
 
@@ -1738,11 +1218,11 @@
 
         music.addEventListener(
             "play",
-            () => {
+            function () {
 
-                updateMusicUI(
-                    true
-                );
+                musicMini.classList.add("playing");
+
+                musicMini.textContent = "🎶";
 
             }
         );
@@ -1750,62 +1230,31 @@
 
         music.addEventListener(
             "pause",
-            () => {
+            function () {
 
-                updateMusicUI(
-                    false
-                );
+                musicMini.classList.remove("playing");
 
-            }
-        );
-
-
-        music.addEventListener(
-            "error",
-            () => {
-
-                showToast(
-                    "فایل music.mp3 پیدا نشد."
-                );
+                musicMini.textContent = "🎵";
 
             }
         );
 
 
-        /* =====================================================
-           AUTO MUSIC
-        ===================================================== */
-
-        function startMusicOnFirstTouch() {
-
-            if (
-                musicStartedByTouch
-            ) {
-
-                return;
-
-            }
-
-            musicStartedByTouch =
-                true;
-
-            playMusic();
-
-        }
-
-
-        document.addEventListener(
-            "pointerdown",
-            startMusicOnFirstTouch,
-            {
-                once: true
-            }
-        );
-
+        /* =========================================================
+           FIRST TOUCH MUSIC
+        ========================================================= */
 
         document.addEventListener(
             "touchstart",
-            startMusicOnFirstTouch,
+            function () {
+
+                if (!musicStartedByTouch) {
+
+                    playMusic();
+
+                }
+
+            },
             {
                 once: true,
                 passive: true
@@ -1813,364 +1262,197 @@
         );
 
 
-        /* =====================================================
-           PAGE NAVIGATION
-        ===================================================== */
+        document.addEventListener(
+            "click",
+            function () {
 
-        function goToPage(
-            pageNumber
-        ) {
+                if (!musicStartedByTouch) {
+
+                    playMusic();
+
+                }
+
+            },
+            {
+                once: true
+            }
+        );
+
+
+        /* =========================================================
+           PAGE NAVIGATION
+        ========================================================= */
+
+        function showPage(pageNumber) {
 
             document
-                .querySelectorAll(
-                    ".page"
-                )
-                .forEach(
-                    page => {
+                .querySelectorAll(".page")
+                .forEach(function (page) {
 
-                        page.classList.remove(
-                            "active"
-                        );
+                    page.classList.remove("active");
 
-                    }
-                );
+                });
 
 
-            const target =
+            const page =
                 document.getElementById(
                     "page" + pageNumber
                 );
 
 
-            if (target) {
+            if (page) {
 
-                target.classList.add(
-                    "active"
-                );
-
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+                page.classList.add("active");
 
             }
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            START
-        ===================================================== */
+        ========================================================= */
 
         function startInvitation() {
 
             playMusic();
 
-            goToPage(2);
+            showPage(2);
 
             createHeartBurst();
 
         }
 
 
-        /* =====================================================
-           RUN AWAY NO BUTTON
-        ===================================================== */
+        /* =========================================================
+           RUN AWAY BUTTON
+        ========================================================= */
 
-        const noBtn =
-            document.getElementById(
-                "noBtn"
-            );
+        function runAway(event) {
 
-        const noWrapper =
-            document.getElementById(
-                "noWrapper"
-            );
+            if (event) {
+
+                event.preventDefault();
+
+            }
 
 
-        function moveNoButton() {
-
-            const wrapperRect =
-                noWrapper.getBoundingClientRect();
+            const button =
+                document.getElementById("noBtn");
 
 
-            const btnRect =
-                noBtn.getBoundingClientRect();
+            if (!button) {
+                return;
+            }
 
 
             const maxX =
                 Math.max(
-                    80,
-                    window.innerWidth < 600
-                        ? 110
-                        : 170
+                    20,
+                    window.innerWidth - button.offsetWidth - 25
                 );
 
 
             const maxY =
-                window.innerWidth < 600
-                    ? 65
-                    : 80;
+                Math.max(
+                    20,
+                    window.innerHeight - button.offsetHeight - 25
+                );
 
 
-            let x =
-                (
-                    Math.random() *
-                    maxX *
-                    2
-                ) - maxX;
+            const x =
+                Math.floor(
+                    Math.random() * maxX
+                );
 
 
-            let y =
-                (
-                    Math.random() *
-                    maxY *
-                    2
-                ) - maxY;
+            const y =
+                Math.floor(
+                    Math.random() * maxY
+                );
 
 
-            noBtn.style.left =
-                x + "px";
+            button.style.position = "fixed";
 
+            button.style.left = x + "px";
 
-            noBtn.style.top =
-                y + "px";
+            button.style.top = y + "px";
 
-
-            showToast(
-                "نههههه 😏 این یکی فرار می‌کنه!"
-            );
+            button.style.zIndex = "999";
 
         }
 
 
-        noBtn.addEventListener(
-            "mouseenter",
-            function() {
+        /* =========================================================
+           PERSIAN DATE
+        ========================================================== */
 
-                moveNoButton();
+        function getPersianDate(date) {
 
-            }
-        );
+            return new Intl.DateTimeFormat(
+                "en-US-u-ca-persian-nu-latn",
+                {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit"
+                }
+            ).format(date);
 
-
-        noBtn.addEventListener(
-            "touchstart",
-            function(event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                moveNoButton();
-
-            },
-            {
-                passive: false
-            }
-        );
+        }
 
 
-        noBtn.addEventListener(
-            "pointerenter",
-            function(event) {
+        function getPersianDateParts(date) {
+
+            const formatter =
+                new Intl.DateTimeFormat(
+                    "en-US-u-ca-persian-nu-latn",
+                    {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit"
+                    }
+                );
+
+
+            const parts =
+                formatter.formatToParts(date);
+
+
+            const result = {};
+
+
+            parts.forEach(function (part) {
 
                 if (
-                    event.pointerType ===
-                    "mouse"
+                    part.type === "year" ||
+                    part.type === "month" ||
+                    part.type === "day"
                 ) {
 
-                    moveNoButton();
+                    result[part.type] =
+                        part.value;
 
                 }
 
-            }
-        );
+            });
 
 
-        noBtn.addEventListener(
-            "click",
-            function(event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                moveNoButton();
-
-            }
-        );
-
-
-        /* =====================================================
-           JALALI DATE
-        ===================================================== */
-
-        function toJalali(
-            date
-        ) {
-
-            try {
-
-                const formatter =
-                    new Intl.DateTimeFormat(
-                        "en-US-u-ca-persian-nu-latn",
-                        {
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit"
-                        }
-                    );
-
-
-                const parts =
-                    formatter.formatToParts(
-                        date
-                    );
-
-
-                const year =
-                    parts.find(
-                        p =>
-                            p.type ===
-                            "year"
-                    )?.value;
-
-
-                const month =
-                    parts.find(
-                        p =>
-                            p.type ===
-                            "month"
-                    )?.value;
-
-
-                const day =
-                    parts.find(
-                        p =>
-                            p.type ===
-                            "day"
-                    )?.value;
-
-
-                return `${year}/${month}/${day}`;
-
-            } catch (error) {
-
-                return date
-                    .toLocaleDateString(
-                        "fa-IR"
-                    );
-
-            }
+            return result;
 
         }
 
 
-        /* =====================================================
-           JALALI TO GREGORIAN
-        ===================================================== */
-
-        function jalaliToGregorian(
-            jy,
-            jm,
-            jd
-        ) {
-
-            const approxYear =
-                jy + 621;
-
-
-            for (
-                let gy =
-                    approxYear - 2;
-
-                gy <=
-                    approxYear + 2;
-
-                gy++
-            ) {
-
-                for (
-                    let month = 0;
-
-                    month < 12;
-
-                    month++
-                ) {
-
-                    const daysInMonth =
-                        new Date(
-                            gy,
-                            month + 1,
-                            0
-                        ).getDate();
-
-
-                    for (
-                        let day = 1;
-
-                        day <=
-                            daysInMonth;
-
-                        day++
-                    ) {
-
-                        const date =
-                            new Date(
-                                gy,
-                                month,
-                                day
-                            );
-
-
-                        const j =
-                            toJalali(
-                                date
-                            );
-
-
-                        const parts =
-                            j
-                                .split("/")
-                                .map(
-                                    Number
-                                );
-
-
-                        if (
-                            parts[0] ===
-                                Number(jy) &&
-
-                            parts[1] ===
-                                Number(jm) &&
-
-                            parts[2] ===
-                                Number(jd)
-                        ) {
-
-                            return date;
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-
-            return null;
-
-        }
-
-
-        /* =====================================================
+        /* =========================================================
            DATE SELECT
-        ===================================================== */
+        ========================================================== */
 
-        function generateDates() {
+        function setupDates() {
 
             const select =
                 document.getElementById(
@@ -2186,30 +1468,33 @@
             select.innerHTML = "";
 
 
+            const placeholder =
+                document.createElement("option");
+
+
+            placeholder.value = "";
+
+            placeholder.textContent =
+                "انتخاب تاریخ";
+
+
+            select.appendChild(
+                placeholder
+            );
+
+
             const today =
                 new Date();
 
 
-            today.setHours(
-                0,
-                0,
-                0,
-                0
-            );
-
-
             for (
                 let i = 0;
-
                 i < 30;
-
                 i++
             ) {
 
                 const date =
-                    new Date(
-                        today
-                    );
+                    new Date(today);
 
 
                 date.setDate(
@@ -2217,10 +1502,16 @@
                 );
 
 
-                const jalali =
-                    toJalali(
-                        date
-                    );
+                const parts =
+                    getPersianDateParts(date);
+
+
+                const value =
+                    parts.year +
+                    "/" +
+                    parts.month +
+                    "/" +
+                    parts.day;
 
 
                 const option =
@@ -2229,28 +1520,17 @@
                     );
 
 
-                option.value =
-                    jalali;
+                option.value = value;
 
 
-                if (
-                    i === 0
-                ) {
+                option.textContent =
+                    value;
 
-                    option.textContent =
-                        `${jalali} — امروز`;
 
-                } else if (
-                    i === 1
-                ) {
+                if (i === 0) {
 
-                    option.textContent =
-                        `${jalali} — فردا`;
-
-                } else {
-
-                    option.textContent =
-                        jalali;
+                    option.textContent +=
+                        " — امروز";
 
                 }
 
@@ -2264,35 +1544,69 @@
         }
 
 
-        generateDates();
+        /* =========================================================
+           GO TO PLACE
+        ========================================================== */
 
+        function goToPlacePage() {
 
-        /* =====================================================
-           PLACE
-        ===================================================== */
-
-        function selectPlace(
-            element
-        ) {
-
-            document
-                .querySelectorAll(
-                    ".place"
-                )
-                .forEach(
-                    place => {
-
-                        place.classList.remove(
-                            "selected"
-                        );
-
-                    }
+            const dateSelect =
+                document.getElementById(
+                    "dateSelect"
                 );
 
 
-            element.classList.add(
-                "selected"
-            );
+            const timeSelect =
+                document.getElementById(
+                    "timeSelect"
+                );
+
+
+            if (!dateSelect.value) {
+
+                showToast(
+                    "اول یه تاریخ انتخاب کن 🌸"
+                );
+
+                return;
+
+            }
+
+
+            if (!timeSelect.value) {
+
+                showToast(
+                    "ساعت قرار رو هم انتخاب کن ⏰"
+                );
+
+                return;
+
+            }
+
+
+            showPage(3);
+
+        }
+
+
+        /* =========================================================
+           PLACE SELECT
+        ========================================================== */
+
+        function selectPlace(element) {
+
+            document
+                .querySelectorAll(".place")
+                .forEach(function (place) {
+
+                    place.classList.remove(
+                        "selected"
+                    );
+
+                });
+
+
+            element.classList.add("selected");
 
 
             selectedPlace =
@@ -2310,240 +1624,28 @@
                 "سورپرایز"
             ) {
 
-                customBox.style.display =
-                    "block";
+                customBox.classList.add(
+                    "show"
+                );
 
             } else {
 
-                customBox.style.display =
-                    "none";
+                customBox.classList.remove(
+                    "show"
+                );
 
             }
 
         }
 
 
-        /* =====================================================
-           SEND SMS TO CLOUDFLARE
-        ===================================================== */
-
-        async function sendAppointmentToBackend(
-            type,
-            place,
-            date,
-            time
-        ) {
-
-            if (
-                smsSent ||
-                smsSending
-            ) {
-
-                return;
-
-            }
-
-
-            smsSending =
-                true;
-
-
-            const smsStatus =
-                document.getElementById(
-                    "smsStatus"
-                );
-
-
-            if (smsStatus) {
-
-                smsStatus.className =
-                    "sms-status";
-
-                smsStatus.textContent =
-                    "در حال ارسال پیامک... 📱";
-
-            }
-
-
-            try {
-
-                const parts =
-                    date
-                        .split("/")
-                        .map(
-                            Number
-                        );
-
-
-                if (
-                    parts.length !== 3
-                ) {
-
-                    throw new Error(
-                        "تاریخ نامعتبر است."
-                    );
-
-                }
-
-
-                const response =
-                    await fetch(
-                        SMS_BACKEND_URL,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify({
-                                    type:
-                                        type,
-
-                                    place:
-                                        place,
-
-                                    year:
-                                        String(
-                                            parts[0]
-                                        ),
-
-                                    month:
-                                        String(
-                                            parts[1]
-                                        ),
-
-                                    day:
-                                        String(
-                                            parts[2]
-                                        ),
-
-                                    time:
-                                        time
-                                })
-                        }
-                    );
-
-
-                let result = null;
-
-
-                try {
-
-                    result =
-                        await response.json();
-
-                } catch (
-                    jsonError
-                ) {
-
-                    result = null;
-
-                }
-
-
-                console.log(
-                    "Cloudflare response:",
-                    result
-                );
-
-
-                if (
-                    response.ok &&
-                    result &&
-                    result.success === true
-                ) {
-
-                    smsSent =
-                        true;
-
-
-                    if (smsStatus) {
-
-                        smsStatus.className =
-                            "sms-status success";
-
-                        smsStatus.textContent =
-                            "پیامک با موفقیت ارسال شد ❤️📱";
-
-                    }
-
-
-                    showToast(
-                        "پیامک با موفقیت ارسال شد ❤️📱"
-                    );
-
-                } else {
-
-                    console.error(
-                        "SMS sending failed:",
-                        result
-                    );
-
-
-                    if (smsStatus) {
-
-                        smsStatus.className =
-                            "sms-status error";
-
-                        smsStatus.textContent =
-                            "قرار ثبت شد، اما ارسال پیامک انجام نشد.";
-
-                    }
-
-
-                    showToast(
-                        "قرار ثبت شد، ولی ارسال پیامک انجام نشد."
-                    );
-
-                }
-
-            } catch (
-                error
-            ) {
-
-                console.error(
-                    "SMS connection error:",
-                    error
-                );
-
-
-                if (smsStatus) {
-
-                    smsStatus.className =
-                        "sms-status error";
-
-                    smsStatus.textContent =
-                        "قرار ثبت شد، اما اتصال به سرویس پیامک برقرار نشد.";
-
-                }
-
-
-                showToast(
-                    "قرار ثبت شد، ولی اتصال به سرویس پیامک برقرار نشد."
-                );
-
-            } finally {
-
-                smsSending =
-                    false;
-
-            }
-
-        }
-
-
-        /* =====================================================
+        /* =========================================================
            CONFIRM PLACE
-        ===================================================== */
+        ========================================================== */
 
-        function confirmPlace() {
+        async function confirmPlace() {
 
-            if (
-                !selectedPlace
-            ) {
+            if (!selectedPlace) {
 
                 showToast(
                     "اول یه مکان انتخاب کن 😏"
@@ -2563,82 +1665,83 @@
                 "سورپرایز"
             ) {
 
-                const custom =
-                    document
-                        .getElementById(
-                            "customPlace"
-                        )
-                        .value
-                        .trim();
+                const customInput =
+                    document.getElementById(
+                        "customPlace"
+                    );
 
 
-                if (
-                    custom.length > 0
-                ) {
+                const customValue =
+                    customInput.value.trim();
 
-                    finalPlace =
-                        "🎁 " + custom;
 
-                } else {
+                if (customValue) {
 
                     finalPlace =
-                        "🎁 سورپرایز";
+                        "سورپرایز: " +
+                        customValue;
 
                 }
 
             }
 
 
-            const selectedDate =
-                document
-                    .getElementById(
-                        "dateSelect"
-                    )
-                    .value;
-
-
-            const selectedTime =
-                document
-                    .getElementById(
-                        "timeSelect"
-                    )
-                    .value;
-
-
-            document
-                .getElementById(
-                    "summaryDate"
-                )
-                .textContent =
-                selectedDate;
-
-
-            document
-                .getElementById(
-                    "summaryTime"
-                )
-                .textContent =
-                formatTime(
-                    selectedTime
+            const dateSelect =
+                document.getElementById(
+                    "dateSelect"
                 );
 
 
-            document
-                .getElementById(
-                    "summaryPlace"
-                )
-                .textContent =
+            const timeSelect =
+                document.getElementById(
+                    "timeSelect"
+                );
+
+
+            const selectedDate =
+                dateSelect.value;
+
+
+            const selectedTime =
+                timeSelect.value;
+
+
+            if (
+                !selectedDate ||
+                !selectedTime
+            ) {
+
+                showToast(
+                    "تاریخ و ساعت رو بررسی کن ❤️"
+                );
+
+                return;
+
+            }
+
+
+            document.getElementById(
+                "summaryDate"
+            ).textContent =
+                selectedDate;
+
+
+            document.getElementById(
+                "summaryTime"
+            ).textContent =
+                selectedTime;
+
+
+            document.getElementById(
+                "summaryPlace"
+            ).textContent =
                 finalPlace;
 
 
-            /*
-             * اگر کاربر دوباره مکان را تغییر دهد،
-             * امکان ارسال دوباره وجود نداشته باشد.
-             *
-             * پیامک فقط یک بار در هر بار باز شدن سایت ارسال می‌شود.
-             */
+            showPage(4);
 
-            goToPage(4);
+
+            createHeartBurst();
 
 
             startCountdown(
@@ -2647,89 +1750,174 @@
             );
 
 
-            createHeartBurst();
+            await sendAppointmentToBackend({
 
-
-            /*
-             * ارسال خودکار یک پیامک
-             */
-
-            sendAppointmentToBackend(
-                selectedPlace ===
+                type:
+                    selectedPlace ===
                     "سورپرایز"
-                    ? "surprise"
-                    : "normal",
+                        ? "surprise"
+                        : "normal",
 
-                finalPlace,
+                place:
+                    finalPlace,
 
-                selectedDate,
+                year:
+                    selectedDate.split("/")[0],
 
-                selectedTime
-            );
+                month:
+                    selectedDate.split("/")[1],
+
+                day:
+                    selectedDate.split("/")[2],
+
+                time:
+                    selectedTime
+
+            });
 
         }
 
 
-        /* =====================================================
-           FORMAT TIME
-        ===================================================== */
+        /* =========================================================
+           SEND TO RENDER / BALE
+        ========================================================== */
 
-        function formatTime(
-            time
+        async function sendAppointmentToBackend(
+            appointment
         ) {
 
-            const parts =
-                time.split(":");
+            if (baleSent || baleSending) {
 
-
-            let hour =
-                parseInt(
-                    parts[0]
-                );
-
-
-            const minute =
-                parts[1];
-
-
-            let period =
-                "عصر";
-
-
-            if (
-                hour >= 20
-            ) {
-
-                period =
-                    "شب";
-
-            } else if (
-                hour < 12
-            ) {
-
-                period =
-                    "صبح";
+                return;
 
             }
 
 
-            return `${hour}:${minute} ${period}`;
+            baleSending = true;
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                );
+
+
+            status.className =
+                "status loading";
+
+
+            status.textContent =
+                "در حال ارسال اعلان به بله... 🔔";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        BALE_BACKEND_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    appointment
+                                )
+                        }
+                    );
+
+
+                let data = null;
+
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (jsonError) {
+
+                    data = null;
+
+                }
+
+
+                if (
+                    response.ok &&
+                    data &&
+                    data.success === true
+                ) {
+
+                    baleSent = true;
+
+
+                    status.className =
+                        "status success";
+
+
+                    status.textContent =
+                        "اعلان با موفقیت به بله ارسال شد ❤️🔔";
+
+
+                    showToast(
+                        "اعلان قرار با موفقیت ارسال شد ❤️"
+                    );
+
+
+                } else {
+
+                    throw new Error(
+                        data &&
+                        data.message
+                            ? data.message
+                            : "Backend error"
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Bale backend error:",
+                    error
+                );
+
+
+                status.className =
+                    "status error";
+
+
+                status.textContent =
+                    "قرار ثبت شد، اما ارسال اعلان انجام نشد. ❌";
+
+
+                showToast(
+                    "ارتباط با سرور برقرار نشد؛ دوباره امتحان کن."
+                );
+
+            } finally {
+
+                baleSending = false;
+
+            }
 
         }
 
 
-        /* =====================================================
+        /* =========================================================
            COUNTDOWN
-        ===================================================== */
+        ========================================================== */
 
         function startCountdown(
             jalaliDate,
             time
         ) {
 
-            if (
-                countdownTimer
-            ) {
+            if (countdownTimer) {
 
                 clearInterval(
                     countdownTimer
@@ -2739,39 +1927,59 @@
 
 
             const parts =
-                jalaliDate
-                    .split("/")
-                    .map(
-                        Number
-                    );
+                jalaliDate.split("/");
+
+
+            const jy =
+                parseInt(
+                    parts[0],
+                    10
+                );
+
+
+            const jm =
+                parseInt(
+                    parts[1],
+                    10
+                );
+
+
+            const jd =
+                parseInt(
+                    parts[2],
+                    10
+                );
 
 
             const timeParts =
-                time
-                    .split(":")
-                    .map(
-                        Number
-                    );
+                time.split(":");
+
+
+            const hour =
+                parseInt(
+                    timeParts[0],
+                    10
+                );
+
+
+            const minute =
+                parseInt(
+                    timeParts[1],
+                    10
+                );
 
 
             const target =
                 jalaliToGregorian(
-                    parts[0],
-                    parts[1],
-                    parts[2]
+                    jy,
+                    jm,
+                    jd
                 );
 
 
-            if (!target) {
-
-                return;
-
-            }
-
-
             target.setHours(
-                timeParts[0],
-                timeParts[1],
+                hour,
+                minute,
                 0,
                 0
             );
@@ -2783,102 +1991,86 @@
                     new Date();
 
 
-                let diff =
+                let difference =
                     target.getTime() -
                     now.getTime();
 
 
-                if (
-                    diff < 0
-                ) {
+                if (difference < 0) {
 
-                    diff = 0;
+                    difference = 0;
 
                 }
 
 
-                const totalSeconds =
-                    Math.floor(
-                        diff / 1000
-                    );
-
-
                 const days =
                     Math.floor(
-                        totalSeconds /
-                        86400
+                        difference /
+                        (1000 * 60 * 60 * 24)
                     );
 
 
                 const hours =
                     Math.floor(
                         (
-                            totalSeconds %
-                            86400
-                        ) / 3600
+                            difference %
+                            (1000 * 60 * 60 * 24)
+                        ) /
+                        (1000 * 60 * 60)
                     );
 
 
                 const minutes =
                     Math.floor(
                         (
-                            totalSeconds %
-                            3600
-                        ) / 60
+                            difference %
+                            (1000 * 60 * 60)
+                        ) /
+                        (1000 * 60)
                     );
 
 
                 const seconds =
-                    totalSeconds %
-                    60;
+                    Math.floor(
+                        (
+                            difference %
+                            (1000 * 60)
+                        ) /
+                        1000
+                    );
 
 
-                document
-                    .getElementById(
-                        "days"
-                    )
-                    .textContent =
-                    String(days)
-                        .padStart(
-                            2,
-                            "0"
-                        );
+                document.getElementById(
+                    "days"
+                ).textContent =
+                    days;
 
 
-                document
-                    .getElementById(
-                        "hours"
-                    )
-                    .textContent =
-                    String(hours)
-                        .padStart(
-                            2,
-                            "0"
-                        );
+                document.getElementById(
+                    "hours"
+                ).textContent =
+                    String(hours).padStart(
+                        2,
+                        "0"
+                    );
 
 
-                document
-                    .getElementById(
-                        "minutes"
-                    )
-                    .textContent =
-                    String(minutes)
-                        .padStart(
-                            2,
-                            "0"
-                        );
+                document.getElementById(
+                    "minutes"
+                ).textContent =
+                    String(minutes).padStart(
+                        2,
+                        "0"
+                    );
 
 
-                document
-                    .getElementById(
-                        "seconds"
-                    )
-                    .textContent =
-                    String(seconds)
-                        .padStart(
-                            2,
-                            "0"
-                        );
+                document.getElementById(
+                    "seconds"
+                ).textContent =
+                    String(seconds).padStart(
+                        2,
+                        "0"
+                    );
 
             }
 
@@ -2895,11 +2087,317 @@
         }
 
 
-        /* =====================================================
-           HEART
-        ===================================================== */
+        /* =========================================================
+           JALALI TO GREGORIAN
+        ========================================================== */
 
-        function createHeart() {
+        function jalaliToGregorian(
+            jy,
+            jm,
+            jd
+        ) {
+
+            let gy;
+
+            let days;
+
+
+            if (jy > 979) {
+
+                gy = 1600;
+
+                jy -= 979;
+
+            } else {
+
+                gy = 621;
+
+            }
+
+
+            days =
+                365 * jy +
+                Math.floor(jy / 33) * 8 +
+                Math.floor(
+                    (
+                        jy % 33 + 3
+                    ) / 4
+                ) +
+                78 +
+                jd +
+                (
+                    jm < 7
+                        ? (jm - 1) * 31
+                        : (jm - 7) * 30 + 186
+                );
+
+
+            gy +=
+                4 *
+                Math.floor(
+                    days / 1461
+                );
+
+
+            days %=
+                1461;
+
+
+            if (days > 365) {
+
+                gy +=
+                    Math.floor(
+                        (days - 1) / 365
+                    );
+
+
+                days =
+                    (days - 1) %
+                    365;
+
+            }
+
+
+            let gd =
+                days + 1;
+
+
+            const monthDays = [
+                31,
+                28,
+                31,
+                30,
+                31,
+                30,
+                31,
+                31,
+                30,
+                31,
+                30,
+                31
+            ];
+
+
+            const leap =
+                (
+                    gy % 4 === 0 &&
+                    gy % 100 !== 0
+                ) ||
+                gy % 400 === 0;
+
+
+            if (leap) {
+
+                monthDays[1] = 29;
+
+            }
+
+
+            let gm = 0;
+
+
+            while (
+                gm < 12 &&
+                gd > monthDays[gm]
+            ) {
+
+                gd -=
+                    monthDays[gm];
+
+                gm++;
+
+            }
+
+
+            return new Date(
+                gy,
+                gm,
+                gd
+            );
+
+        }
+
+
+        /* =========================================================
+           CHANGE PLACE
+        ========================================================== */
+
+        function changePlace() {
+
+            if (countdownTimer) {
+
+                clearInterval(
+                    countdownTimer
+                );
+
+                countdownTimer = null;
+
+            }
+
+
+            baleSent = false;
+
+            baleSending = false;
+
+
+            showPage(3);
+
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================== */
+
+        let toastTimer = null;
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            if (toastTimer) {
+
+                clearTimeout(
+                    toastTimer
+                );
+
+            }
+
+
+            toastTimer =
+                setTimeout(
+                    function () {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    3000
+                );
+
+        }
+
+
+        /* =========================================================
+           HEART BURST
+        ========================================================== */
+
+        function createHeartBurst() {
+
+            const hearts = [
+                "❤️",
+                "💕",
+                "💗",
+                "💖",
+                "💘",
+                "🌸"
+            ];
+
+
+            for (
+                let i = 0;
+                i < 18;
+                i++
+            ) {
+
+                const heart =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                heart.className =
+                    "burst-heart";
+
+
+                heart.textContent =
+                    hearts[
+                        Math.floor(
+                            Math.random() *
+                            hearts.length
+                        )
+                    ];
+
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+
+                const distance =
+                    100 +
+                    Math.random() *
+                    230;
+
+
+                const x =
+                    Math.cos(angle) *
+                    distance;
+
+
+                const y =
+                    Math.sin(angle) *
+                    distance;
+
+
+                const rotation =
+                    Math.random() *
+                    120 -
+                    60;
+
+
+                heart.style.setProperty(
+                    "--x",
+                    x + "px"
+                );
+
+
+                heart.style.setProperty(
+                    "--y",
+                    y + "px"
+                );
+
+
+                heart.style.setProperty(
+                    "--r",
+                    rotation + "deg"
+                );
+
+
+                document.body.appendChild(
+                    heart
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        heart.remove();
+
+                    },
+                    1400
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           FLOATING HEARTS
+        ========================================================== */
+
+        function createFloatingHeart() {
 
             const heart =
                 document.createElement(
@@ -2911,25 +2409,20 @@
                 "heart";
 
 
-            const symbols = [
-
-                "❤️",
+            const hearts = [
+                "❤",
                 "💕",
-                "💖",
                 "💗",
-                "💓",
-                "💞",
                 "🌸",
                 "✨"
-
             ];
 
 
             heart.textContent =
-                symbols[
+                hearts[
                     Math.floor(
                         Math.random() *
-                        symbols.length
+                        hearts.length
                     )
                 ];
 
@@ -2942,19 +2435,21 @@
 
             heart.style.fontSize =
                 (
-                    14 +
+                    12 +
                     Math.random() *
-                    20
+                    18
                 ) +
                 "px";
 
 
+            const duration =
+                7 +
+                Math.random() *
+                8;
+
+
             heart.style.animationDuration =
-                (
-                    5 +
-                    Math.random() *
-                    6
-                ) +
+                duration +
                 "s";
 
 
@@ -2964,101 +2459,34 @@
 
 
             setTimeout(
-                () => {
+                function () {
 
                     heart.remove();
 
                 },
-                12000
+                duration * 1000 + 500
             );
-
-        }
-
-
-        function createHeartBurst() {
-
-            for (
-                let i = 0;
-
-                i < 18;
-
-                i++
-            ) {
-
-                setTimeout(
-                    createHeart,
-                    i * 70
-                );
-
-            }
 
         }
 
 
         setInterval(
-            createHeart,
-            1300
+            createFloatingHeart,
+            850
         );
 
 
-        /* =====================================================
-           TOAST
-        ===================================================== */
-
-        let toastTimer =
-            null;
-
-
-        function showToast(
-            message
-        ) {
-
-            toast.textContent =
-                message;
-
-
-            toast.classList.add(
-                "show"
-            );
-
-
-            if (
-                toastTimer
-            ) {
-
-                clearTimeout(
-                    toastTimer
-                );
-
-            }
-
-
-            toastTimer =
-                setTimeout(
-                    () => {
-
-                        toast.classList.remove(
-                            "show"
-                        );
-
-                    },
-                    2200
-                );
-
-        }
-
-
-        /* =====================================================
-           LOAD
-        ===================================================== */
+        /* =========================================================
+           INITIALIZE
+        ========================================================== */
 
         window.addEventListener(
             "load",
-            function() {
+            function () {
 
-                generateDates();
+                setupDates();
 
-                createHeartBurst();
+                createFloatingHeart();
 
             }
         );
@@ -3066,5 +2494,4 @@
     </script>
 
 </body>
-
 </html>
